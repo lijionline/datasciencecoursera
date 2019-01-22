@@ -1,0 +1,75 @@
+> data[1:2,]
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+> colnames[data]
+Error in colnames[data] : object of type 'closure' is not subsettable
+> colName[data]
+Error: object 'colName' not found
+> colname(data)
+Error in colname(data) : could not find function "colname"
+> colnames(data)
+[1] "Ozone"   "Solar.R" "Wind"    "Temp"    "Month"   "Day"    
+> count(data)
+Error in count(data) : could not find function "count"
+> nrow(data)
+[1] 153
+> ncol(data)
+[1] 6
+> tail(data,2)
+    Ozone Solar.R Wind Temp Month Day
+152    18     131  8.0   76     9  29
+153    20     223 11.5   68     9  30
+> head(data,3)
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+> data[47,1]
+[1] 21
+> nrow(data$Ozone==NA)
+NULL
+> nrow(data,data$Ozone==NA)
+Error in nrow(data, data$Ozone == NA) : 
+  unused argument (data$Ozone == NA)
+> nrow(data,data$Ozone=NA
+Error: unexpected '=' in "nrow(data,data$Ozone="
+> str(data)
+'data.frame':   153 obs. of  6 variables:
+ $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
+ $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+ $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+ $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
+ $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
+ $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...
+> sum(is.na(data$Ozone))
+[1] 37
+> datanotna<-subset(data,!is.na(Ozone))
+> apply(datanotna,2,mean)
+    Ozone   Solar.R      Wind      Temp     Month       Day 
+42.129310        NA  9.862069 77.870690  7.198276 15.534483 
+> datasub18<-subset(data,data$Ozone>31 & data$Temp>90,select=Solar.R)
+> Mean<-apply(datasub18,2,mean)
+> mean
+function (x, ...) 
+UseMethod("mean")
+<bytecode: 0x0000000024bcbbd0>
+<environment: namespace:base>
+> apply(datasub18,2,mean)
+Solar.R 
+  212.8 
+> datasub19<-subset(data,data$Month==6,select=Temp)
+> apply(datasub19,2,mean)
+Temp 
+79.1 
+> datasub19<-subset(data,data$Month==5,Select=ozone)
+> apply(datasub19,2,max)
+  Ozone Solar.R    Wind    Temp   Month     Day 
+     NA      NA    20.1    81.0     5.0    31.0 
+> datasub19<-subset(data,data$Month==5&!is.na(ozone),select=Ozone)
+Error in eval(e, x, parent.frame()) : object 'ozone' not found
+> datasub19<-subset(data,data$Month==5&!is.na(Ozone),select=Ozone)
+> apply(datasub19,2,max)
+Ozone 
+  115 
+> 
